@@ -453,16 +453,16 @@ class DigitalHumanModel:
                                      background_region_gpu_debug)
                     save_debug_image(work_id, frame_abs_idx, '06_fused_final_face_region', fused_face_region_debug.clamp(0, 1))
 
-            print("\n" + "=" * 80)
-            print(f"审查批次 {work_id} (帧 {start_frame_idx} onwards) 的循环矢量化先决条件:")
-            print("-" * 80)
-            print(f"{'帧索引 (批内)':<20} | {'目标坐标 (y1, y2, x1, x2)':<35} | {'目标尺寸 (h, w)':<20}")
-            print("-" * 80)
+            # print("\n" + "=" * 80)
+            # print(f"审查批次 {work_id} (帧 {start_frame_idx} onwards) 的循环矢量化先决条件:")
+            # print("-" * 80)
+            # print(f"{'帧索引 (批内)':<20} | {'目标坐标 (y1, y2, x1, x2)':<35} | {'目标尺寸 (h, w)':<20}")
+            # print("-" * 80)
             for entry in prerequisite_params_log:
                 coord_str = str(entry['target_coords'])
                 size_str = str(entry['target_size'])
-                print(f"{entry['frame_index_in_batch']:<20} | {coord_str:<35} | {size_str:<20}")
-            print("=" * 80 + "\n")
+                # print(f"{entry['frame_index_in_batch']:<20} | {coord_str:<35} | {size_str:<20}")
+            # print("=" * 80 + "\n")
 
             # B5. 最终并行合成
             final_frames_gpu = foreground_canvas + original_frames_gpu * (1 - paste_mask.repeat(1, 3, 1, 1))
