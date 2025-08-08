@@ -1086,7 +1086,7 @@ def _preprocessing_worker(video_path,
                                                             profile='mouth_and_chin',
                                                             feather_kernel_size=35,
                                                             dilation_size=19,
-                                                            horizontal_erosion_ratio=0.15)
+                                                            horizontal_erosion_ratio=0.30)
 
             face_data_dict_all[i]['crop_img'] = std_crop_img
             face_data_dict_all[i]['crop_lm'] = std_lm
@@ -1821,7 +1821,14 @@ def video_writer_manager(writer_command_queue, result_queue, task_status_dict):
                         writer_info['writer'].release()
                 # 从活动字典中删除
                 del active_writers[task_id]
+                task_status_dict[task_id]
+                temp_cache =os.path.join('data/cache',status.get('model_id'))
+                for filename in os.listdir(temp_cache):
+                    file_path = os.path.join(temp_cache, filename)
+                    os.remove(file_path)
+                
                 logger.info(f"[{task_id}] 任务已终结并清理。")
+
 
     # =============================================================
     #                       块 3: 主事件循环
